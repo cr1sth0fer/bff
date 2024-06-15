@@ -8,6 +8,12 @@ import "core:bytes"
 @(test)
 test :: proc(t: ^testing.T)
 {
+    Ann :: struct
+    {
+        float0: f32,
+        int0: int,
+    }
+
     Foo :: struct
     {
         rune0: rune,
@@ -22,6 +28,10 @@ test :: proc(t: ^testing.T)
         uint2: u32,
         uint3: u64,
 
+        float0: f16,
+        float1: f32,
+        float2: f64,
+
         name0: string,
         name1: string,
 
@@ -30,6 +40,8 @@ test :: proc(t: ^testing.T)
 
         slice0: []int,
         slice1: []u64,
+
+        ann0: Ann,
     }
 
     foo: Foo
@@ -45,6 +57,10 @@ test :: proc(t: ^testing.T)
     foo.uint2 = 22
     foo.uint3 = 23
 
+    foo.float0 = 11.11
+    foo.float1 = 22.22
+    foo.float2 = 33.33
+
     foo.name0 = "Name 0"
     foo.name1 = "Name 1"
 
@@ -53,6 +69,9 @@ test :: proc(t: ^testing.T)
 
     foo.slice0 = {1, 2, 3, 4, 5}
     foo.slice1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0}
+
+    foo.ann0 = {88.88, 1234}
+
     fmt.println("Struct:", foo)
 
     buffer: bytes.Buffer

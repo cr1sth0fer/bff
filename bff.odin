@@ -44,7 +44,8 @@ marshal :: proc(stream: io.Stream, s: ^$T)
             io.write_ptr(stream, data, field.type.size)
         }
         else if reflect.is_rune(field.type) || reflect.is_byte(field.type) ||
-            reflect.is_integer(field.type) || reflect.is_float(field.type)
+            reflect.is_integer(field.type) || reflect.is_float(field.type) ||
+            reflect.is_struct(field.type)
         {
             data := cast(rawptr)(root + field.offset)
             io.write_ptr(stream, &field.type.size, size_of(int))
@@ -107,7 +108,8 @@ unmarshal :: proc(s: ^$T, data: []byte) -> (success: bool)
             mem.copy(dst, raw_field.data, raw_field.len)
         }
         else if reflect.is_rune(field.type) || reflect.is_byte(field.type) ||
-            reflect.is_integer(field.type) || reflect.is_float(field.type)
+            reflect.is_integer(field.type) || reflect.is_float(field.type) ||
+            reflect.is_struct(field.type)
         {
             dst := cast(rawptr)(root + field.offset)
             mem.copy(dst, raw_field.data, raw_field.len)
