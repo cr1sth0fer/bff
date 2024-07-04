@@ -14,6 +14,12 @@ test :: proc(t: ^testing.T)
         int0: int,
     }
 
+    Awe :: union
+    {
+        string,
+        [2]int,
+    }
+
     Foo :: struct
     {
         rune0: rune,
@@ -42,6 +48,9 @@ test :: proc(t: ^testing.T)
         slice1: []u64,
 
         ann0: Ann,
+
+        union0: Awe,
+        union1: Awe,
     }
 
     foo: Foo
@@ -71,6 +80,9 @@ test :: proc(t: ^testing.T)
     foo.slice1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0}
 
     foo.ann0 = {88.88, 1234}
+
+    foo.union0 = "Union 0"
+    foo.union1 = [2]int{-12345, +54321}
 
     fmt.println("Struct:", foo)
 
